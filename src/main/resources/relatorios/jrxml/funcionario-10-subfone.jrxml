@@ -1,0 +1,50 @@
+<!-- Created with Jaspersoft Studio version 7.0.3.final using JasperReports Library version 7.0.3-41034ca841d452f3305ba55b9042260aaa1ab5dd  -->
+<jasperReport name="funcionario-10-subfone" language="java" pageWidth="180" pageHeight="30" columnWidth="180" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="632e59fa-4c8b-498e-b596-ce9255d32fe6">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MySQL Udemy Data Adapter"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="ID_FUNCIONARIO" class="java.lang.Long"/>
+	<query language="SQL"><![CDATA[SELECT 
+DISTINCT t.numero, t.tipo_fone
+FROM telefones t, funcionarios f
+WHERE t.id_funcionario = $P{ID_FUNCIONARIO}]]></query>
+	<field name="numero" class="java.lang.String">
+		<description><![CDATA[]]></description>
+		<property name="com.jaspersoft.studio.field.name" value="numero"/>
+		<property name="com.jaspersoft.studio.field.label" value="numero"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="telefones"/>
+	</field>
+	<field name="tipo_fone" class="java.lang.String">
+		<description><![CDATA[]]></description>
+		<property name="com.jaspersoft.studio.field.name" value="tipo_fone"/>
+		<property name="com.jaspersoft.studio.field.label" value="tipo_fone"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="telefones"/>
+	</field>
+	<background splitType="Stretch"/>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<element kind="textField" uuid="92e59ce0-3812-4876-a58d-28733f913968" x="0" y="0" width="90" height="30" hTextAlign="Right" vTextAlign="Middle">
+				<expression><![CDATA[$F{tipo_fone}.equals("CEL")? "Celular ":
+$F{tipo_fone}.equals("RES")? "Residencial " : "Comercial"]]></expression>
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<box padding="5"/>
+			</element>
+			<element kind="textField" uuid="71fcb17b-6413-4fc8-adfa-dd3d932bda72" x="100" y="0" width="90" height="30" vTextAlign="Middle">
+				<expression><![CDATA[$F{tipo_fone}.equals("CEL") ?
+"(" + $F{numero}.substring(0,2) + ")" + " " + $F{numero}.substring(2,7) + " - " + $F{numero}.substring(7,11) :
+"(" + $F{numero}.substring(0,2) + ")" + " " + $F{numero}.substring(2,6) + " - " + $F{numero}.substring(6,10)]]></expression>
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<box padding="5"/>
+			</element>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</detail>
+</jasperReport>
